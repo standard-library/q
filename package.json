@@ -1,0 +1,34 @@
+{
+  "name": "@artcommacode/q",
+  "version": "1.0.0",
+  "description": "A tiny library to return arrays from DOM queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "browserify test/index.js > test/build/bundle.js && testling -x open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artcommacode/q.git"
+  },
+  "keywords": [
+    "q",
+    "query",
+    "dom",
+    "functional",
+    "arrays",
+    "query-selector"
+  ],
+  "testling": {
+    "html": "test/index.html"
+  },
+  "author": "@artcommacode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artcommacode/q/issues"
+  },
+  "homepage": "https://github.com/artcommacode/q#readme",
+  "devDependencies": {
+    "tape": "^4.0.0",
+    "testling": "^1.7.1"
+  }
+}

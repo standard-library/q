@@ -1,8 +1,6 @@
 var test = require('tape')
 var q = require('../')
 
-console.log(q('ul li')[0] === q('ul li:first-of-type'))
-
 test('test q', function (t) {
   var ul = q('ul')
   var li

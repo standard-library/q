@@ -9,7 +9,7 @@ $ npm install @artcommacode/q --save
 
 ## Usage
 
-q wraps [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) and [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) in two exported functions, `query` returns arrays rather than NodeLists and `queryOne` returns a single element.
+q wraps [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) into two exported functions; `query`, which returns arrays rather than NodeLists and `queryOne`, which returns a single element.
 
 ``` js
 import { query, queryOne } from '@artcommacode/q'
@@ -60,26 +60,29 @@ q is only 19 lines short, small enough to fit in this README:
 ``` js
 const toArray = (list) => [].slice.call(list)
 
+const car = <T>(xs: Array<T>): T => xs[0]
+
 const elemError = (e) => {
   throw new Error(`"${e}" does\'t exist in the document`)
 }
 
-const getRoot = (e) => {
+const getRoot = (e: ?HTMLElement): Document | HTMLElement => {
   if (!e) return document
   return document.body.contains(e) ? e : elemError(e)
 }
 
-const car = (xs) => xs[0]
-
-export const query = (q, e) => {
+export const query = (q: string, e: HTMLElement): Array<HTMLElement> => {
   const root = getRoot(e)
   return toArray((root).querySelectorAll(q))
 }
 
-export const queryOne = (q, e) => car(query(q, e))
+export const queryOne = (q: string, e: HTMLElement): ?HTMLElement => car(query(q, e))
 ```
 
-Note that q doesn't shim `querySelectorAll` and as such is meant for modern (post IE7, post IE8 if you're using CSS 3 selectors) browsers.
+A couple things to note here:
+
+1. I'm using [flow](http://flowtype.org) for static type checking.
+2. q doesn't shim `querySelectorAll` and as such is meant for modern (post IE7 or post IE8 if you're using CSS 3 selectors) browsers.
 
 ## Tests
 

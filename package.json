@@ -1,6 +1,6 @@
 {
   "name": "@artcommacode/q",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A tiny library to return arrays from DOM queries and allow composable queries.",
   "main": "index.js",
   "scripts": {

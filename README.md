@@ -81,7 +81,6 @@ export const queryOne = (q, e) => car(query(q, e))
 
 Note that q doesn't shim `querySelectorAll` and as such is meant for modern (post IE7, post IE8 if you're using CSS 3 selectors) browsers.
 
-
 ## Tests
 
 ```
@@ -89,3 +88,7 @@ $ npm install && npm test
 ```
 
 This will open a tab in your browser to run tests against `test/index.html` with the results displayed in your terminal. If you see `# ok` then it all went well, if there are any errors please submit an [issue](https://github.com/artcommacode/q/issues).
+
+## 1.0
+
+The 2.0 release of q is a complete rewrite, if you're still using 1.0 you can find the previous docs [here](https://github.com/artcommacode/q/blob/942d1a3dab2e7dec6f8588e02e80e4018e13084b/README.md).

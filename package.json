@@ -1,10 +1,11 @@
 {
   "name": "@artcommacode/q",
-  "version": "1.0.2",
-  "description": "A tiny library to return arrays from DOM queries",
+  "version": "2.0.0",
+  "description": "A tiny library to return arrays from DOM queries and allow composable queries.",
   "main": "index.js",
   "scripts": {
-    "test": "browserify test/index.js > test/build/bundle.js && testling -x open"
+    "build": "babel index.es6 --presets=es2015 --out-file index.js",
+    "test": "npm run build && browserify -t [ babelify --presets [ es2015 ] ] test/index.js > test/build/bundle.js && testling -x open"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,9 @@
   },
   "homepage": "https://github.com/artcommacode/q#readme",
   "devDependencies": {
+    "babel-cli": "^6.4.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
     "browserify": "^11.0.1",
     "tape": "^4.0.0",
     "testling": "^1.7.1"

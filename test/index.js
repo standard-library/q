@@ -1,14 +1,14 @@
-var test = require('tape')
-var q = require('../')
+import test from 'tape'
+import { query, queryOne } from '../'
 
 test('test q', function (t) {
-  var ul = q('ul')
-  var li
-  t.equal(q('ul li').length, 3)
-  t.equal(q('ul li')[0].textContent, '$1')
-  t.deepEqual(q('ul li:first-of-type'), q('ul li')[0])
-  t.deepEqual(q('ul li'), q('li', ul))
-  t.deepEqual(q('ul div'), [])
-  t.deepEqual(q('div', li), [])
+  const ul = queryOne('ul')
+  const li = 'not_an_element'
+  t.equal(query('ul li').length, 3)
+  t.equal(query('ul li')[0].textContent, '$1')
+  t.deepEqual(queryOne('ul li:first-of-type'), query('ul li')[0], queryOne('ul li'))
+  t.deepEqual(query('ul li'), query('li', ul))
+  t.deepEqual(query('ul div'), [])
+  t.throws(() => query('div', li))
   t.end()
 })

@@ -55,28 +55,29 @@ query('div', li)
 
 ## Tiny
 
-q is only 19 lines short, small enough to fit in this README:
+q is only 20 lines short, small enough to fit in this README:
 
 ``` js
-const toArray = (list) => [].slice.call(list)
+const toArray = <T>(list: Iterable<T>): T[] => [...list]
 
-const car = <T>(xs: Array<T>): T => xs[0]
+const first = <T>(xs: T[]): T => xs[0]
 
-const elemError = (e) => {
-  throw new Error(`"${e}" does\'t exist in the document`)
+const elemError = (e: mixed): void => {
+  throw new Error(`"${String(e)}" does\'t exist in the document`)
 }
 
-const getRoot = (e: ?HTMLElement): Document | HTMLElement => {
-  if (!e) return document
-  return document.body.contains(e) ? e : elemError(e)
-}
+const getRoot = (e: ?HTMLElement): Document | HTMLElement | void => (
+  !e ? document : (document && document.body && document.body.contains(e) ? e : elemError(e))
+)
 
-export const query = (q: string, e: HTMLElement): Array<HTMLElement> => {
+export const query = (q: string, e: HTMLElement): HTMLElement[] => {
   const root = getRoot(e)
-  return toArray((root).querySelectorAll(q))
+  return root ? toArray(root.querySelectorAll(q)) : []
 }
 
-export const queryOne = (q: string, e: HTMLElement): ?HTMLElement => car(query(q, e))
+export const queryOne = (q: string, e: HTMLElement): ?HTMLElement => (
+  first(query(q, e))
+)
 ```
 
 A couple things to note here:

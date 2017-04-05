@@ -30,11 +30,11 @@ queryOne('ul li') === query('ul li')[0]
 // => true
 ```
 
-You can compose queries with `queryChildren` or `queryChild`, by passing an element as the second argument:
+You can compose queries with `queryChildren` or `queryChild`, by passing an element as the first argument:
 
 ``` js
 const ul = queryOne('ul')
-queryChildren('li', ul)
+queryChildren(ul, 'li')
 // => [ <li>...</li>, <li>...</li>, <li>...</li> ]
 ```
 
@@ -52,7 +52,7 @@ q will throw an error if you try to run a query on an element that doesn't exist
 
 ``` js
 const li = 'not_an_element'
-queryChildren('div', li)
+queryChildren(li, 'div')
 // => Error: "not_an_element" does't exist in the document
 ```
 
@@ -74,20 +74,20 @@ const getRoot = (e: ParentElement): ParentElement => {
   return document.body.contains(e) ? e : elemError(e)
 }
 
-export const queryChildren = (q: string, e: ParentElement): Array<HTMLElement> => {
+export const queryChildren = (e: ParentElement, q: string): Array<HTMLElement> => {
   const root = getRoot(e)
   return toArray((root).querySelectorAll(q))
 }
 
-export const queryChild = (q: string, e: ParentElement): ?HTMLElement => {
-  return car(queryChildren(q, e))
+export const queryChild = (e: ParentElement, q: string): ?HTMLElement => {
+  return car(queryChildren(e, q))
 }
 
 export const query = (q: string): Array<HTMLElement> => {
-  return queryChildren(q, document)
+  return queryChildren(document, q)
 }
 
-export const queryOne = (q: string): ?HTMLElement => queryChild(q, document)
+export const queryOne = (q: string): ?HTMLElement => queryChild(document, q)
 ```
 
 A couple things to note here:

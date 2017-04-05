@@ -16,17 +16,17 @@ const getRoot = (e: ParentElement): ParentElement => {
   return document.body.contains(e) ? e : elemError(e)
 }
 
-export const queryChildren = (q: string, e: ParentElement): Array<HTMLElement> => {
+export const queryChildren = (e: ParentElement, q: string): Array<HTMLElement> => {
   const root = getRoot(e)
   return toArray((root).querySelectorAll(q))
 }
 
-export const queryChild = (q: string, e: ParentElement): ?HTMLElement => {
-  return car(queryChildren(q, e))
+export const queryChild = (e: ParentElement, q: string): ?HTMLElement => {
+  return car(queryChildren(e, q))
 }
 
 export const query = (q: string): Array<HTMLElement> => {
-  return queryChildren(q, document)
+  return queryChildren(document, q)
 }
 
-export const queryOne = (q: string): ?HTMLElement => queryChild(q, document)
+export const queryOne = (q: string): ?HTMLElement => queryChild(document, q)

@@ -25,19 +25,19 @@ var getRoot = function getRoot(e) {
   return document.body.contains(e) ? e : elemError(e);
 };
 
-var queryChildren = exports.queryChildren = function queryChildren(q, e) {
+var queryChildren = exports.queryChildren = function queryChildren(e, q) {
   var root = getRoot(e);
   return toArray(root.querySelectorAll(q));
 };
 
-var queryChild = exports.queryChild = function queryChild(q, e) {
-  return car(queryChildren(q, e));
+var queryChild = exports.queryChild = function queryChild(e, q) {
+  return car(queryChildren(e, q));
 };
 
 var query = exports.query = function query(q) {
-  return queryChildren(q, document);
+  return queryChildren(document, q);
 };
 
 var queryOne = exports.queryOne = function queryOne(q) {
-  return queryChild(q, document);
+  return queryChild(document, q);
 };

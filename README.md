@@ -58,32 +58,34 @@ queryChildren(li, 'div')
 
 ## Tiny
 
-q is only 30 lines short, small enough to fit in this README:
+q is only 29 lines short, small enough to fit in this README:
 
 ``` js
+type ParentElement = Document | HTMLElement;
+
 const toArray = (list) => [].slice.call(list)
 
-const car = <T>(xs: Array<T>): T => xs[0]
+const first = <T>(xs: T[]): T => xs[0]
 
-const elemError = (e: ParentElement) => {
-  throw new Error(`"${e.toString()}" does\'t exist in the document`)
+const elemError = (e: ParentElement): void => {
+  throw new Error(`"${String(e)}" does\'t exist in the document`)
 }
 
-const getRoot = (e: ParentElement): ParentElement => {
+const getRoot = (e: ParentElement): ?ParentElement => {
   if (e === document) return e
-  return document.body.contains(e) ? e : elemError(e)
+  return document && document.body && document.body.contains(e) ? e : elemError(e)
 }
 
-export const queryChildren = (e: ParentElement, q: string): Array<HTMLElement> => {
+export const queryChildren = (e: ParentElement, q: string): HTMLElement[] => {
   const root = getRoot(e)
-  return toArray((root).querySelectorAll(q))
+  return root ? toArray(root.querySelectorAll(q)) : []
 }
 
 export const queryChild = (e: ParentElement, q: string): ?HTMLElement => {
-  return car(queryChildren(e, q))
+  return first(queryChildren(e, q))
 }
 
-export const query = (q: string): Array<HTMLElement> => {
+export const query = (q: string): HTMLElement[] => {
   return queryChildren(document, q)
 }
 

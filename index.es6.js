@@ -1,31 +1,29 @@
-/* @flow */
-
+// @flow
 type ParentElement = Document | HTMLElement;
 
-const toArray = (list) => [].slice.call(list)
+const toArray = <T>(list: Iterable<T>): T[] => [...list]
 
-// workaround for strip-types issue with arrow functions and generics
-const car = function <T>(xs: Array<T>): T {return xs[0]}
+const first = <T>(xs: T[]): T => xs[0]
 
-const elemError = (e: ParentElement) => {
-  throw new Error(`"${e.toString()}" does\'t exist in the document`)
+const elemError = (e: ParentElement): void => {
+  throw new Error(`"${String(e)}" does\'t exist in the document`)
 }
 
-const getRoot = (e: ParentElement): ParentElement => {
+const getRoot = (e: ParentElement): ?ParentElement => {
   if (e === document) return e
-  return document.body.contains(e) ? e : elemError(e)
+  return document && document.body && document.body.contains(e) ? e : elemError(e)
 }
 
-export const queryChildren = (e: ParentElement, q: string): Array<HTMLElement> => {
+export const queryChildren = (e: ParentElement, q: string): HTMLElement[] => {
   const root = getRoot(e)
-  return toArray((root).querySelectorAll(q))
+  return root ? toArray(root.querySelectorAll(q)) : []
 }
 
 export const queryChild = (e: ParentElement, q: string): ?HTMLElement => {
-  return car(queryChildren(e, q))
+  return first(queryChildren(e, q))
 }
 
-export const query = (q: string): Array<HTMLElement> => {
+export const query = (q: string): HTMLElement[] => {
   return queryChildren(document, q)
 }
 

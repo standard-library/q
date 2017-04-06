@@ -1,6 +1,6 @@
 {
   "name": "@standard-library/q-prime",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A tiny library to return arrays from DOM queries and allow composable queries.",
   "main": "index.js",
   "scripts": {

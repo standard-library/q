@@ -1,5 +1,5 @@
 {
-  "name": "@standard-library/q",
+  "name": "@standard-library/q-prime",
   "version": "3.0.1",
   "description": "A tiny library to return arrays from DOM queries and allow composable queries.",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/standard-library/q.git"
+    "url": "git+https://github.com/standard-library/q-prime.git"
   },
   "keywords": [
     "arrays",
@@ -27,9 +27,9 @@
   "author": "@artcommacode, @standard-library",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/standard-library/q/issues"
+    "url": "https://github.com/standard-library/q-prime/issues"
   },
-  "homepage": "https://github.com/standard-library/q#readme",
+  "homepage": "https://github.com/standard-library/q-prime#readme",
   "devDependencies": {
     "babel-cli": "^6.24.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",

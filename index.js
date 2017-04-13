@@ -19,9 +19,13 @@ var elemError = function elemError(e) {
   throw new Error("\"" + String(e) + "\" does't exist in the document");
 };
 
+var elemExists = function elemExists(e) {
+  return document && document.body && document.body.contains(e);
+};
+
 var getRoot = function getRoot(e) {
   if (e === document) return e;
-  return document && document.body && document.body.contains(e) ? e : elemError(e);
+  return elemExists(e) ? e : elemError(e);
 };
 
 var queryChildren = exports.queryChildren = function queryChildren(e, q) {

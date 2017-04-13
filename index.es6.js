@@ -9,9 +9,13 @@ const elemError = (e: ParentElement): void => {
   throw new Error(`"${String(e)}" does\'t exist in the document`)
 }
 
+const elemExists = (e: ParentElement) => {
+  return document && document.body && document.body.contains(e)
+}
+
 const getRoot = (e: ParentElement): ?ParentElement => {
   if (e === document) return e
-  return document && document.body && document.body.contains(e) ? e : elemError(e)
+  return elemExists(e) ? e : elemError(e)
 }
 
 export const queryChildren = (e: ParentElement, q: string): HTMLElement[] => {
